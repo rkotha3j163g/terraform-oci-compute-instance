@@ -35,12 +35,9 @@ locals {
     
 # compute instance parameters
 
-variable "ad_number" {
+variable ad_number = 2
   description = "The availability domain number of the instance. If none is provided, it will start with AD-1 and continue in round-robin."
-  type        = 2
-  default     = null
-}
-
+  
 # variable "fd_number" {
 #   // for future use, adding fault domain support
 #   description = "(Updatable) The fault domain of the instance."
