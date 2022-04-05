@@ -35,7 +35,7 @@ locals {
     
 # compute instance parameters
 
-variable ad_number = 2
+variable "ad_number" = 2
   description = "The availability domain number of the instance. If none is provided, it will start with AD-1 and continue in round-robin."
   
 # variable "fd_number" {
