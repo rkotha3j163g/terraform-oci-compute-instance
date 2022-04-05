@@ -79,10 +79,6 @@ variable "instance_state" {
   description = "(Updatable) The target state for the instance. Could be set to RUNNING or STOPPED."
   default     = "RUNNING"
 
-  validation {
-    condition     = contains(["RUNNING", "STOPPED"], var.instance_state)
-    error_message = "Accepted values are RUNNING or STOPPED."
-  }
 }
 
 variable "shape" {
@@ -248,10 +244,6 @@ variable "boot_volume_backup_policy" {
   type        = string
   default     = "disabled"
 
-  validation {
-    condition     = contains(["gold", "silver", "bronze", "disabled"], var.boot_volume_backup_policy)
-    error_message = "Accepted values are gold, silver, bronze or disabled (case sensitive)."
-  }
 }
 
 variable "boot_volume_size_in_gbs" {
