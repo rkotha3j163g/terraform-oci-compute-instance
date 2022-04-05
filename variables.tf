@@ -32,9 +32,7 @@ locals {
     terraformed = "Please do not edit manually"
     module      = "oracle-terraform-modules/compute-instance/oci"
   }
-  merged_freeform_tags = merge(local.default_freeform_tags, var.freeform_tags)
-}
-
+    
 # compute instance parameters
 
 variable "ad_number" {
