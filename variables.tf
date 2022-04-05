@@ -32,7 +32,24 @@ locals {
     terraformed = "Please do not edit manually"
     module      = "oracle-terraform-modules/compute-instance/oci"
   }
-    
+  merged_freeform_tags = merge(local.default_freeform_tags, var.freeform_tags)
+}
+
+# compute instance parameters
+
+variable "ad_number" {
+  description = "The availability domain number of the instance. If none is provided, it will start with AD-1 and continue in round-robin."
+  type        = number
+  default     = null
+}
+
+# variable "fd_number" {
+#   // for future use, adding fault domain support
+#   description = "(Updatable) The fault domain of the instance."
+#   type        = number
+#   default     = null
+# }
+
 variable "instance_count" {
   description = "Number of identical instances to launch from a single module."
   type        = number
@@ -62,6 +79,10 @@ variable "instance_state" {
   description = "(Updatable) The target state for the instance. Could be set to RUNNING or STOPPED."
   default     = "RUNNING"
 
+  validation {
+    condition     = contains(["RUNNING", "STOPPED"], var.instance_state)
+    error_message = "Accepted values are RUNNING or STOPPED."
+  }
 }
 
 variable "shape" {
@@ -92,6 +113,10 @@ variable "baseline_ocpu_utilization" {
   type        = string
   default     = "BASELINE_1_1"
 
+  validation {
+    condition     = contains(["BASELINE_1_8", "BASELINE_1_2", "BASELINE_1_1"], var.baseline_ocpu_utilization)
+    error_message = "Accepted values are BASELINE_1_8, BASELINE_1_2 or BASELINE_1_1."
+  }
 }
 
 variable "source_ocid" {
@@ -170,6 +195,10 @@ variable "public_ip" {
   type        = string
   default     = "NONE"
 
+  validation {
+    condition     = contains(["NONE", "RESERVED", "EPHEMERAL"], var.public_ip)
+    error_message = "Accepted values are NONE, RESERVED or EPHEMERAL."
+  }
 }
 
 variable "public_ip_display_name" {
@@ -227,6 +256,10 @@ variable "boot_volume_backup_policy" {
   type        = string
   default     = "disabled"
 
+  validation {
+    condition     = contains(["gold", "silver", "bronze", "disabled"], var.boot_volume_backup_policy)
+    error_message = "Accepted values are gold, silver, bronze or disabled (case sensitive)."
+  }
 }
 
 variable "boot_volume_size_in_gbs" {
