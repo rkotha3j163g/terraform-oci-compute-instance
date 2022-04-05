@@ -37,7 +37,7 @@ locals {
 
 variable "ad_number" {
   description = "The availability domain number of the instance. If none is provided, it will start with AD-1 and continue in round-robin."
-  type        = number
+  type        = 2
   default     = null
 }
 
