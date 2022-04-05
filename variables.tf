@@ -113,10 +113,6 @@ variable "baseline_ocpu_utilization" {
   type        = string
   default     = "BASELINE_1_1"
 
-  validation {
-    condition     = contains(["BASELINE_1_8", "BASELINE_1_2", "BASELINE_1_1"], var.baseline_ocpu_utilization)
-    error_message = "Accepted values are BASELINE_1_8, BASELINE_1_2 or BASELINE_1_1."
-  }
 }
 
 variable "source_ocid" {
@@ -195,10 +191,6 @@ variable "public_ip" {
   type        = string
   default     = "NONE"
 
-  validation {
-    condition     = contains(["NONE", "RESERVED", "EPHEMERAL"], var.public_ip)
-    error_message = "Accepted values are NONE, RESERVED or EPHEMERAL."
-  }
 }
 
 variable "public_ip_display_name" {
